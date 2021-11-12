@@ -24,6 +24,10 @@ module.exports = function Fruit_basket(pool) {
     return results.rows;
   }
 
+  async function updateNumOfFruits() {
+    await pool.query(``);
+  }
+
   async function deleteFruits() {
     try {
       await pool.query(`DELETE FROM fruit_basket WHERE fruit_basket.id >= 1`);
@@ -36,6 +40,7 @@ module.exports = function Fruit_basket(pool) {
   return {
     createNewFruit,
     getAFruit,
+    updateNumOfFruits,
     deleteFruits,
   };
 };
