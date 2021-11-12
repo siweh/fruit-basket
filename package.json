@@ -1,0 +1,18 @@
+{
+  "name": "fruit-basket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fruit-basket.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "^9.1.3",
+    "pg": "^8.7.1"
+  }
+}
