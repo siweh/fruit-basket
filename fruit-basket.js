@@ -24,8 +24,22 @@ module.exports = function Fruit_basket(pool) {
     return results.rows;
   }
 
-  async function updateNumOfFruits() {
-    await pool.query(``);
+  async function getAllFruits(typeOfFruit) {
+    let results = await pool.query(
+      `select fruit_quantity, fruit_type, unit_price from fruit_basket where fruit_type = $1`,
+      [typeOfFruit]
+    );
+    //console.log(results.rows);
+    return results.rows;
+  }
+
+  async function updateNumOfFruits(numOfFruits, type) {
+    let results = await pool.query(
+      `update fruit_basket set fruit_quantity = $1 where fruit_type = $2`,
+      [numOfFruits, type]
+    );
+    console.log(results.rows);
+    return results.rows;
   }
 
   async function deleteFruits() {
@@ -40,6 +54,7 @@ module.exports = function Fruit_basket(pool) {
   return {
     createNewFruit,
     getAFruit,
+    getAllFruits,
     updateNumOfFruits,
     deleteFruits,
   };
