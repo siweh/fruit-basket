@@ -17,7 +17,7 @@ module.exports = function Fruit_basket(pool) {
       console.log(error);
     }
   }
-  async function getAllFruits(typeOfFruit) {
+  async function getFruit(typeOfFruit) {
     let results = await pool.query(
       `select fruit_quantity, fruit_type, unit_price from fruit_basket where fruit_type = $1`,
       [typeOfFruit]
@@ -35,23 +35,6 @@ module.exports = function Fruit_basket(pool) {
     return results.rows;
   }
 
-  async function totalPriceOfBasket(typeOfFruit) {
-    let results = await pool.query(
-      `select unit_price from fruit_basket where fruit_type = $1`,
-      [typeOfFruit]
-    );
-    //console.log(results.rows);
-    return results.rows;
-  }
-
-  async function sumOfFruitBaskets(typeOfFruit) {
-    let results = await pool.query(
-      'select sum(unit_price) from fruit_basket where fruit_type = $1',
-      [typeOfFruit]
-    );
-    return results.rows;
-  }
-
   async function deleteFruits() {
     try {
       await pool.query(`DELETE FROM fruit_basket WHERE fruit_basket.id >= 1`);
@@ -63,10 +46,8 @@ module.exports = function Fruit_basket(pool) {
 
   return {
     createNewFruit,
-    getAllFruits,
+    getFruit,
     updateNumOfFruits,
-    totalPriceOfBasket,
-    sumOfFruitBaskets,
     deleteFruits,
   };
 };
