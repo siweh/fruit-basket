@@ -17,13 +17,6 @@ module.exports = function Fruit_basket(pool) {
       console.log(error);
     }
   }
-
-  // async function getAFruit() {
-  //   let results = await pool.query(`select * from fruit_basket`);
-  //   //console.log(results.rows);
-  //   return results.rows;
-  // }
-
   async function getAllFruits(typeOfFruit) {
     let results = await pool.query(
       `select fruit_quantity, fruit_type, unit_price from fruit_basket where fruit_type = $1`,
