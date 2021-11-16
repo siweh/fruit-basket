@@ -14,7 +14,7 @@ describe('The fruit basket exercise', function () {
   beforeEach(async function () {
     // clean the tables before each test run
     const fruits = Fruit_basket(pool);
-    //await fruits.deleteFruits();
+    await fruits.deleteFruits();
   });
   it('should be able to find all the fruit baskets for a given fruit type,', async function () {
     const fruits = Fruit_basket(pool);
@@ -38,14 +38,14 @@ describe('The fruit basket exercise', function () {
 
   it('should be able to update number of fruits for a given basket', async function () {
     const fruits = Fruit_basket(pool);
-    // await fruits.createNewFruit('Grapes', 3, 35);
+    await fruits.createNewFruit('Grapes', 3, 35);
     let fruit = await fruits.getAllFruits('Grapes');
 
     await fruits.updateNumOfFruits(fruit[0].fruit_quantity + 1, 'Grapes');
     assert.deepEqual(
       [
         {
-          fruit_quantity: 15,
+          fruit_quantity: 4,
           fruit_type: 'Grapes',
           unit_price: 35,
         },
@@ -56,6 +56,7 @@ describe('The fruit basket exercise', function () {
 
   it('should be able to show the total price for a given fruit basket', async function () {
     const fruits = Fruit_basket(pool);
+    await fruits.createNewFruit('Banana', 5, 28);
     await fruits.getAllFruits('Banana');
     assert.deepEqual(
       [
@@ -69,6 +70,7 @@ describe('The fruit basket exercise', function () {
 
   it('should be able to show the sum of the total of the fruit baskets for a given fruit type', async function () {
     const fruits = Fruit_basket(pool);
+    await fruits.createNewFruit('Banana', 5, 28);
     await fruits.getAllFruits('Banana');
     assert.deepEqual(
       [
