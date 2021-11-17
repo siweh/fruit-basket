@@ -61,7 +61,7 @@ describe('The fruit basket exercise', function () {
     assert.deepEqual(
       [
         {
-          fruit_total: '15',
+          fruit_total: 15,
         },
       ],
       await fruits.totalPriceOfBasket('Banana')
