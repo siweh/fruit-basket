@@ -41,11 +41,11 @@ describe('The fruit basket exercise', function () {
     await fruits.createNewFruit('Grapes', 3, 5);
     let fruit = await fruits.getFruit('Grapes');
 
-    await fruits.updateNumOfFruits(fruit[0].fruit_quantity + 1, 'Grapes');
+    await fruits.updateNumOfFruits(fruit[0].fruit_quantity + 5, 'Grapes');
     assert.deepEqual(
       [
         {
-          fruit_quantity: 4,
+          fruit_quantity: 8,
           fruit_type: 'Grapes',
           unit_price: 5,
         },
@@ -57,12 +57,15 @@ describe('The fruit basket exercise', function () {
   it('should be able to show the total price for a given fruit basket', async function () {
     const fruits = Fruit_basket(pool);
     await fruits.createNewFruit('Banana', 5, 3);
-    let results = await fruits.getFruit('Banana');
-    //console.log(results);
-    let overallTotalPrice = results[0].fruit_quantity * results[0].unit_price;
-    //console.log(overallTotalPrice);
 
-    assert.deepEqual(15, overallTotalPrice);
+    assert.deepEqual(
+      [
+        {
+          fruit_total: '15',
+        },
+      ],
+      await fruits.totalPriceOfBasket('Banana')
+    );
   });
 
   it('should be able to show the sum of the total of the fruit baskets for a given fruit type', async function () {
