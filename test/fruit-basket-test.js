@@ -13,8 +13,7 @@ const pool = new Pool({
 describe('The fruit basket exercise', function () {
   beforeEach(async function () {
     // clean the tables before each test run
-    const fruits = Fruit_basket(pool);
-    await fruits.deleteFruits();
+    await pool.query(`delete from fruit_basket`);
   });
   it('should be able to find all the fruit baskets for a given fruit type,', async function () {
     const fruits = Fruit_basket(pool);
@@ -39,13 +38,13 @@ describe('The fruit basket exercise', function () {
   it('should be able to update number of fruits for a given basket', async function () {
     const fruits = Fruit_basket(pool);
     await fruits.createNewFruit('Grapes', 3, 5);
-    let fruit = await fruits.getFruit('Grapes');
+    //await fruits.getFruit('Grapes');
 
-    await fruits.updateNumOfFruits(fruit[0].fruit_quantity + 5, 'Grapes');
+    await fruits.updateNumOfFruits(3, 'Grapes');
     assert.deepEqual(
       [
         {
-          fruit_quantity: 8,
+          fruit_quantity: 6,
           fruit_type: 'Grapes',
           unit_price: 5,
         },
